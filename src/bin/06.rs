@@ -3,19 +3,13 @@ advent_of_code::solution!(6);
 use std::collections::HashSet;
 
 pub fn part_one(input: &str) -> Option<u64> {
-    let grid: Vec<Vec<char>> = input
-        .lines()
-        .map(|line| line.chars().collect())
-        .collect();
+    let grid: Vec<Vec<char>> = input.lines().map(|line| line.chars().collect()).collect();
 
     Some(find_total_positions(&grid) as u64)
 }
 
 pub fn part_two(input: &str) -> Option<u64> {
-    let mut grid: Vec<Vec<char>> = input
-        .lines()
-        .map(|line| line.chars().collect())
-        .collect();
+    let mut grid: Vec<Vec<char>> = input.lines().map(|line| line.chars().collect()).collect();
 
     let (start_row, start_col, _) = find_starting_position(&grid);
     let mut loop_count = 0;
@@ -45,7 +39,6 @@ pub fn part_two(input: &str) -> Option<u64> {
 }
 
 fn find_total_positions(grid: &[Vec<char>]) -> usize {
-
     let (start_row, start_col, start_dir) = find_starting_position(grid);
     let mut visited = HashSet::new();
     let mut row = start_row as i32;
@@ -89,7 +82,6 @@ fn find_total_positions(grid: &[Vec<char>]) -> usize {
 }
 
 fn creates_loop(grid: &[Vec<char>]) -> bool {
-
     let (start_row, start_col, start_dir) = find_starting_position(grid);
     let mut visited_states = HashSet::new();
     let mut row = start_row as i32;
@@ -152,7 +144,6 @@ fn find_starting_position(grid: &[Vec<char>]) -> (usize, usize, (i32, i32)) {
     }
     panic!("No starting position found");
 }
-
 
 #[cfg(test)]
 mod tests {

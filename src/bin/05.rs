@@ -4,7 +4,8 @@ advent_of_code::solution!(5);
 
 pub fn part_one(input: &str) -> Option<u32> {
     let (rules, updates) = parse_input(input);
-    let sum = updates.iter()
+    let sum = updates
+        .iter()
         .filter(|update| is_correctly_ordered(update, &rules))
         .map(|update| update[update.len() / 2])
         .sum();
@@ -13,7 +14,8 @@ pub fn part_one(input: &str) -> Option<u32> {
 
 pub fn part_two(input: &str) -> Option<u32> {
     let (rules, updates) = parse_input(input);
-    let sum = updates.iter()
+    let sum = updates
+        .iter()
         .filter(|update| !is_correctly_ordered(update, &rules))
         .map(|update| fix_order(update, &rules))
         .map(|update| update[update.len() / 2])
@@ -33,16 +35,15 @@ fn parse_input(input: &str) -> (HashMap<u32, HashSet<u32>>, Vec<Vec<u32>>) {
         let parts: Vec<&str> = line.split('|').collect();
         let before = parts[0].parse::<u32>().unwrap();
         let after = parts[1].parse::<u32>().unwrap();
-        rules.entry(before).or_insert_with(HashSet::new).insert(after);
+        rules
+            .entry(before)
+            .or_insert_with(HashSet::new)
+            .insert(after);
     }
 
     // Parse update sequences
     let updates = lines
-        .map(|line| {
-            line.split(',')
-                .map(|n| n.parse::<u32>().unwrap())
-                .collect()
-        })
+        .map(|line| line.split(',').map(|n| n.parse::<u32>().unwrap()).collect())
         .collect();
 
     (rules, updates)

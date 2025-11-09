@@ -23,7 +23,7 @@ pub fn part_one(input: &str) -> Option<u64> {
                 break;
             }
             if file_block_map[j].is_none() && file_block_map[i].is_some() {
-                file_block_map.swap(i,j);
+                file_block_map.swap(i, j);
                 break;
             }
         }
@@ -70,7 +70,11 @@ pub fn part_two(input: &str) -> Option<u64> {
     }
 
     // Helper function to find leftmost free space that can fit file
-    fn find_free_space(free_spaces: &HashMap<usize, usize>, file_size: usize, file_pos: usize) -> Option<usize> {
+    fn find_free_space(
+        free_spaces: &HashMap<usize, usize>,
+        file_size: usize,
+        file_pos: usize,
+    ) -> Option<usize> {
         free_spaces
             .iter()
             .filter(|(&pos, &size)| pos < file_pos && size >= file_size)

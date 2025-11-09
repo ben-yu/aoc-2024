@@ -4,16 +4,13 @@ use std::collections::HashMap;
 use std::collections::HashSet;
 
 pub fn part_one(input: &str) -> Option<u64> {
-
-    let grid: Vec<Vec<char>> = input
-        .lines()
-        .map(|line| line.chars().collect())
-        .collect();
+    let grid: Vec<Vec<char>> = input.lines().map(|line| line.chars().collect()).collect();
     let mut nodes: HashMap<char, Vec<(usize, usize)>> = HashMap::new();
     for row in 0..grid.len() {
         for col in 0..grid[0].len() {
             let ch = grid[row][col];
-            if ch != '.' { // Only store antenna positions, not empty spaces
+            if ch != '.' {
+                // Only store antenna positions, not empty spaces
                 nodes.entry(ch).or_insert_with(Vec::new).push((row, col));
             }
         }
@@ -39,10 +36,12 @@ pub fn part_one(input: &str) -> Option<u64> {
                 let antinode2 = (r2 + dr, c2 + dc); // After second antenna
 
                 // Check bounds and add valid antinodes
-                if antinode1.0 >= 0 && antinode1.0 < rows && antinode1.1 >= 0 && antinode1.1 < cols {
+                if antinode1.0 >= 0 && antinode1.0 < rows && antinode1.1 >= 0 && antinode1.1 < cols
+                {
                     antinodes.insert(antinode1);
                 }
-                if antinode2.0 >= 0 && antinode2.0 < rows && antinode2.1 >= 0 && antinode2.1 < cols {
+                if antinode2.0 >= 0 && antinode2.0 < rows && antinode2.1 >= 0 && antinode2.1 < cols
+                {
                     antinodes.insert(antinode2);
                 }
             }
@@ -53,15 +52,13 @@ pub fn part_one(input: &str) -> Option<u64> {
 }
 
 pub fn part_two(input: &str) -> Option<u64> {
-    let grid: Vec<Vec<char>> = input
-        .lines()
-        .map(|line| line.chars().collect())
-        .collect();
+    let grid: Vec<Vec<char>> = input.lines().map(|line| line.chars().collect()).collect();
     let mut nodes: HashMap<char, Vec<(usize, usize)>> = HashMap::new();
     for row in 0..grid.len() {
         for col in 0..grid[0].len() {
             let ch = grid[row][col];
-            if ch != '.' { // Only store antenna positions, not empty spaces
+            if ch != '.' {
+                // Only store antenna positions, not empty spaces
                 nodes.entry(ch).or_insert_with(Vec::new).push((row, col));
             }
         }
@@ -86,7 +83,8 @@ pub fn part_two(input: &str) -> Option<u64> {
                 let mut k = 0;
                 loop {
                     let antinode = (r1 + k * dr, c1 + k * dc);
-                    if antinode.0 >= 0 && antinode.0 < rows && antinode.1 >= 0 && antinode.1 < cols {
+                    if antinode.0 >= 0 && antinode.0 < rows && antinode.1 >= 0 && antinode.1 < cols
+                    {
                         antinodes.insert(antinode);
                         k += 1;
                     } else {
@@ -98,7 +96,8 @@ pub fn part_two(input: &str) -> Option<u64> {
                 k = -1;
                 loop {
                     let antinode = (r1 + k * dr, c1 + k * dc);
-                    if antinode.0 >= 0 && antinode.0 < rows && antinode.1 >= 0 && antinode.1 < cols {
+                    if antinode.0 >= 0 && antinode.0 < rows && antinode.1 >= 0 && antinode.1 < cols
+                    {
                         antinodes.insert(antinode);
                         k -= 1;
                     } else {

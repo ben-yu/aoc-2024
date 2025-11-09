@@ -1,7 +1,8 @@
 advent_of_code::solution!(7);
 
 pub fn part_one(input: &str) -> Option<u64> {
-    let sum: u64 = input.lines()
+    let sum: u64 = input
+        .lines()
         .map(|line| parse_input(line))
         .filter(|(target, nums)| valid_combination(*target, nums))
         .map(|(target, _)| target)
@@ -10,7 +11,8 @@ pub fn part_one(input: &str) -> Option<u64> {
 }
 
 pub fn part_two(input: &str) -> Option<u64> {
-    let sum: u64 = input.lines()
+    let sum: u64 = input
+        .lines()
         .map(|line| parse_input(line))
         .filter(|(target, nums)| valid_combination_with_concat(*target, nums))
         .map(|(target, _)| target)
@@ -21,7 +23,8 @@ pub fn part_two(input: &str) -> Option<u64> {
 fn parse_input(line: &str) -> (u64, Vec<u64>) {
     let parts: Vec<&str> = line.split(':').collect();
     let target = parts[0].parse::<u64>().unwrap();
-    let nums = parts[1].split_whitespace()
+    let nums = parts[1]
+        .split_whitespace()
         .map(|n| n.parse::<u64>().unwrap())
         .collect();
 
@@ -84,8 +87,8 @@ fn valid_combination_with_concat(target: u64, nums: &[u64]) -> bool {
             temp_combo /= 3;
 
             match op {
-                0 => result += nums[i + 1],                    // Addition
-                1 => result *= nums[i + 1],                    // Multiplication
+                0 => result += nums[i + 1],                             // Addition
+                1 => result *= nums[i + 1],                             // Multiplication
                 2 => result = concatenate_numbers(result, nums[i + 1]), // Concatenation
                 _ => unreachable!(),
             }
@@ -104,7 +107,6 @@ fn concatenate_numbers(left: u64, right: u64) -> u64 {
     let concatenated = format!("{}{}", left, right);
     concatenated.parse().unwrap_or(u64::MAX) // Return MAX on overflow
 }
-
 
 #[cfg(test)]
 mod tests {
